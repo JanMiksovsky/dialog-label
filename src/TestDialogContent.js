@@ -13,49 +13,49 @@ import ReactiveElement from "../node_modules/elix/src/core/ReactiveElement.js";
 class TestDialogContent extends ReactiveElement {
   get [defaultState]() {
     return Object.assign(super[defaultState], {
-      header: "",
+      heading: "",
     });
   }
 
-  get header() {
-    return this[state].header;
+  get heading() {
+    return this[state].heading;
   }
-  set header(header) {
-    this[setState]({ header });
+  set heading(heading) {
+    this[setState]({ heading });
   }
 
   [render](changed) {
     super[render](changed);
 
     // if (this[firstRender]) {
-    //   this[ids].headerSlot.addEventListener("slotchange", () => {
-    //     const header = getHeaderText(this[ids].headerSlot);
+    //   this[ids].headingSlot.addEventListener("slotchange", () => {
+    //     const heading = getheadingText(this[ids].headingSlot);
     //     this.dispatchEvent(
-    //       new CustomEvent("headerchange", {
+    //       new CustomEvent("headingchange", {
     //         bubbles: true,
     //         detail: {
-    //           header,
+    //           heading,
     //         },
     //       })
     //     );
     //   });
     // }
 
-    if (changed.header) {
-      this[ids].header.textContent = this[state].header;
+    if (changed.heading) {
+      this[ids].heading.textContent = this[state].heading;
     }
   }
 
   [rendered](changed) {
     super[rendered](changed);
 
-    if (changed.header) {
-      const { header } = this[state];
+    if (changed.heading) {
+      const { heading } = this[state];
       this.dispatchEvent(
-        new CustomEvent("headerchange", {
+        new CustomEvent("headingchange", {
           bubbles: true,
           detail: {
-            header,
+            heading,
           },
         })
       );
@@ -69,14 +69,14 @@ class TestDialogContent extends ReactiveElement {
           padding: 1em;
         }
       </style>
-      <h1 id="header"></h1>
-      <!-- <slot id="headerSlot" name="header"></slot> -->
+      <h1 id="heading"></h1>
+      <!-- <slot id="headingSlot" name="heading"></slot> -->
       <slot></slot>
     `;
   }
 }
 
-function getHeaderText(slot) {
+function getheadingText(slot) {
   const nodes = slot.assignedNodes({ deep: true });
   const text = nodes.map((node) => node.textContent).join(" ");
   return text.trim();
